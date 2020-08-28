@@ -1,6 +1,6 @@
 package com.company;
 
-import java.io.*;
+
 import java.util.Scanner;
 import java.util.Random;
 
@@ -38,13 +38,13 @@ public class Main {
         int games = 0;
         boolean playagain = true;
 
-        while(playagain == true) {
+        while(playagain) {
             games++;
             int guesses = 0;
             int guess = 0;
             int prevguess = 0;
             do {
-                System.out.print("\nGuess the secret number(1-100): ");
+                System.out.print(username+ ", Guess the secret number(1-100): ");
 
                 Scanner number = new Scanner(System.in);
                 guess = number.nextInt();
@@ -74,21 +74,30 @@ public class Main {
 
             Scanner end = new Scanner(System.in);
             System.out.println("Total guesses this game: " + guesses);
+
             System.out.print("Do you want to play again: ");
             String endgame = end.nextLine();
-
-            if(endgame.equalsIgnoreCase("n") || endgame.equalsIgnoreCase("no")){
-                playagain = false;
-            }
-
+            int i = 0;
+            do {
+                if (endgame.equalsIgnoreCase("n") || endgame.equalsIgnoreCase("no")) {
+                    playagain = false;
+                    i++;
+                } else if (endgame.equalsIgnoreCase("y") || endgame.equalsIgnoreCase("yes")){
+                    playagain = true;
+                    i++;
+                }else {
+                    System.out.print("Do you want to play again: ");
+                    endgame = end.nextLine();
+                }
+            }while(i == 0);
         }
 
         double optimal =  (Math.log(100)/Math.log(2));
 
-        System.out.println("Total guesses in all sessions: " + totalguesses);
+        System.out.println("\nTotal guesses in all sessions: " + totalguesses);
         System.out.println("Total guesses per game: " + totalguesses/games);
         System.out.printf("Optimal number of guesses per game: %.2f\n", optimal);
-        System.out.println("Thanks for playing!");
+        System.out.println("Thanks for playing " + username + "!");
 
     }
 
