@@ -19,9 +19,11 @@ public class Main {
         System.out.print("Welcome to the High-Low Game!\nThe goal of this game is to guess the secret number (1-100)\nEnter your username:");
         String playername = in.nextLine();
 
-        System.out.println("Welcome, " + playername + "!");
-
-
+        if(playername.isEmpty()){
+            System.out.println("Welcome, Player 1!");
+        }else{
+            System.out.println("Welcome, " + playername + "!");
+        }
 
         return playername;
     }
