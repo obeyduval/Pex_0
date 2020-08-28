@@ -35,9 +35,11 @@ public class Main {
 
     public static void game(String username, int magicnum){
         int totalguesses = 0;
+        int games = 0;
         boolean playagain = true;
 
         while(playagain == true) {
+            games++;
             int guesses = 0;
             int guess = 0;
             int prevguess = 0;
@@ -81,8 +83,11 @@ public class Main {
 
         }
 
-        System.out.println("Total guesses this session: " + totalguesses);
-        System.out.println("Optimal number of guesses: ");
+        double optimal =  (Math.log(100)/Math.log(2));
+
+        System.out.println("Total guesses in all sessions: " + totalguesses);
+        System.out.println("Total guesses per game: " + totalguesses/games);
+        System.out.printf("Optimal number of guesses per game: %.2f\n", optimal);
         System.out.println("Thanks for playing!");
 
     }
