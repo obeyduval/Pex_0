@@ -13,7 +13,8 @@ public class Main {
     public static void playgame(){
         String username = getusername();
         int magicnum = randomizemagicnumber();
-        int guesses = guess(username, magicnum);
+        game(username, magicnum);
+
     }
 
     public static String getusername(){
@@ -32,27 +33,58 @@ public class Main {
         return playername;
     }
 
-    public static int guess(String username, int magicnum){
-        int guesses = 0;
-        int guess = 0;
-        do {
-            System.out.println("\nGuess the secret number(1-100): ");
+    public static void game(String username, int magicnum){
+        int totalguesses = 0;
+        boolean playagain = true;
 
-            Scanner number = new Scanner(System.in);
-            guess = number.nextInt();
+        while(playagain == true) {
+            int guesses = 0;
+            int guess = 0;
+            int prevguess = 0;
+            do {
+                System.out.print("\nGuess the secret number(1-100): ");
 
-            if (guess == magicnum) {
-                System.out.println("\nYou guessed the secret number!");
-            } else if (guess > magicnum) {
-                System.out.println("\nYour guess was higher than the secret number :(");
-            } else if (guess < magicnum) {
-                System.out.println("\nYour guess was lower than the secret number :(");
+                Scanner number = new Scanner(System.in);
+                guess = number.nextInt();
+
+                if(guess > 100 || guess < 0){
+                    System.out.println("invalid guess");
+                } else if (guess == magicnum) {
+                    System.out.println("\nYou guessed the secret number!");
+                } else if (guess > magicnum) {
+                    if (guess > prevguess && guesses > 0 && prevguess > magicnum) {
+                        System.out.println("\nYou guessed higher again loserrr!");
+                    } else {
+                        System.out.println("\nYour guess was higher than the secret number :(");
+                    }
+                } else if (guess < magicnum) {
+                    if (guess < prevguess && guesses > 0 && prevguess < magicnum) {
+                        System.out.println("\nYou guessed lower again loserrr!");
+                    } else {
+                        System.out.println("\nYour guess was lower than the secret number :(");
+                    }
+                }
+                guesses++;
+                prevguess = guess;
+            } while (guess != magicnum);
+
+            totalguesses = guesses + totalguesses;
+
+            Scanner end = new Scanner(System.in);
+            System.out.println("Total guesses this game: " + guesses);
+            System.out.print("Do you want to play again: ");
+            String endgame = end.nextLine();
+
+            if(endgame.equalsIgnoreCase("n") || endgame.equalsIgnoreCase("no")){
+                playagain = false;
             }
-        }while (guess!=magicnum);
 
-        System.out.println("DEBUGing magic num = " +magicnum);
+        }
 
-        return guesses;
+        System.out.println("Total guesses this session: " + totalguesses);
+        System.out.println("Optimal number of guesses: ");
+        System.out.println("Thanks for playing!");
+
     }
 
     public static int randomizemagicnumber(){
