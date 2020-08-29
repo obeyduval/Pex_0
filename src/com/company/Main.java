@@ -1,6 +1,6 @@
 package com.company;
 
-
+import java.io.*;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -44,13 +44,13 @@ public class Main {
             int guess = 0;
             int prevguess = 0;
             do {
-                System.out.print(username+ ", Guess the secret number(1-100): ");
+                System.out.print(username + ", Guess the secret number(1-100): ");
 
                 Scanner number = new Scanner(System.in);
                 guess = number.nextInt();
 
-                if(guess > 100 || guess < 0){
-                    System.out.println("invalid guess");
+                if(guess > 100 || guess < 1){
+                    System.out.println("invalid guess (must be in between 1 and 100)");
                 } else if (guess == magicnum) {
                     System.out.println("\nYou guessed the secret number!");
                 } else if (guess > magicnum) {
