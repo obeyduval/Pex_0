@@ -1,3 +1,9 @@
+/*
+*Timothy Jackson
+*Main method only holds playgame(); function for abstraction
+*Documentation = no help recieved.
+ */
+
 package com.company;
 
 // for scanner library
@@ -9,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
 	playgame();
-    } //main play game abstracted view
+    } //main play game abstracted view ( end of main)
 
     //process of game
     public static void playgame(){
